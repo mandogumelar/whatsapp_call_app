@@ -4,27 +4,31 @@ on:
   push:
     branches:
       - main
+  workflow_dispatch:
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
+      - name: Checkout repository
         uses: actions/checkout@v3
 
       - name: Set up Python
-        uses: actions/setup-python@v3
+        uses: actions/setup-python@v4
         with:
-          python-version: '3.10'
+          python-version: 3.10
 
-      - name: Install dependencies
+      - name: Install system dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y git python3-dev build-essential autoconf automake libtool pkg-config zlib1g-dev
+
+      - name: Install Python dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install buildozer
+          pip install cython==0.29.36 buildozer
 
-      - name: Build APK
+      - name: Run Buildozer to build APK
         run: |
           buildozer android debug
-        env:
-          HOME: /home/runner/work/whatsapp_call_app/whatsapp_call_app
