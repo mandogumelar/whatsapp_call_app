@@ -12,7 +12,7 @@ jobs:
 
     steps:
     - name: Checkout repository
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
 
     - name: Set up Python
       uses: actions/setup-python@v4
@@ -22,14 +22,19 @@ jobs:
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
-        pip install buildozer cython
+        pip install buildozer cython kivy
 
-    - name: Build APK
+    - name: Run Buildozer APK build
       run: |
         buildozer android debug
+      env:
+        ANDROIDSDK: ${{ secrets.ANDROIDSDK }}
+        ANDROIDNDK: ${{ secrets.ANDROIDNDK }}
+        ANDROIDAPI: 33
+        ANDROIDMINAPI: 21
 
     - name: Upload APK
       uses: actions/upload-artifact@v4
       with:
-        name: whatsapp_call_apk
+        name: whatsapp-call-debug-apk
         path: bin/*.apk
