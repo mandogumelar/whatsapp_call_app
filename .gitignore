@@ -1,3 +1,27 @@
+# Buildozer and python-for-android build folders
 .buildozer/
+bin/
+dist/
 __pycache__/
 *.pyc
+*.pyo
+
+# Virtual environments
+venv/
+env/
+.whatsapp_venv_*/
+whatsapp_venv_*/
+*.egg-info/
+
+# Android/NDK/SDK temporary files
+*.apk
+*.aab
+*.log
+*.keystore
+.gradle/
+local.properties
+
+# OS junk files
+.DS_Store
+Thumbs.db
+
