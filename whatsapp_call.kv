@@ -1,0 +1,17 @@
+BoxLayout:
+    orientation: 'vertical'
+    spacing: 20
+    padding: 50
+
+    Button:
+        text: "📞 Telepon Ayah/Ibu"
+        font_size: 40
+        background_color: 0, 0.5, 1, 1
+        on_release: app.root.call_voice()
+
+    Button:
+        text: "🎥 Video Call Ayah/Ibu"
+        font_size: 40
+        background_color: 0, 1, 0.5, 1
+        on_release: app.root.call_video()
+
